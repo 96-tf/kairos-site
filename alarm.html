@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Kairos Alarm</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><main>
+<h1>Set iPhone alarm</h1>
+<p id="summary" class="muted">Opening Shortcuts...</p>
+<p><a id="open" href="#">Tap here if Shortcuts didn't open</a></p>
+<p class="muted">Needs the "Kairos Alarm" shortcut on this iPhone. Nothing is stored on this page.</p>
+<script>
+  // Hands the alarm time and label to the "Kairos Alarm" shortcut, which creates a Clock alarm.
+  const q = new URLSearchParams(location.search);
+  const time = q.get("t") || "";
+  const label = (q.get("l") || "Kairos alarm").slice(0, 60);
+  const summary = document.getElementById("summary");
+  const link = document.getElementById("open");
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) {
+    summary.textContent = "This alarm link is invalid.";
+    link.remove();
+  } else {
+    summary.textContent = "Alarm at " + time + ": " + label;
+    const url = "shortcuts://run-shortcut?name=" + encodeURIComponent("Kairos Alarm") +
+      "&input=text&text=" + encodeURIComponent(time + "|" + label);
+    link.href = url;
+    location.href = url;
+  }
+</script>
+</main></body>
+</html>
