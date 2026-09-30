@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Kairos Steps</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><main>
+<h1>Send today's steps</h1>
+<p class="muted">Opening Shortcuts...</p>
+<p><a id="open" href="#">Tap here if Shortcuts didn't open</a></p>
+<p class="muted">Needs the "Kairos Steps" shortcut on this iPhone. It reads today's steps from Apple Health and puts them in the Kairos chat for you to send. Nothing is stored on this page.</p>
+<script>
+  // Runs the "Kairos Steps" shortcut; the count never passes through this page.
+  const url = "shortcuts://run-shortcut?name=" + encodeURIComponent("Kairos Steps");
+  document.getElementById("open").href = url;
+  location.href = url;
+</script>
+</main></body>
+</html>
